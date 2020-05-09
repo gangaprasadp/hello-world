@@ -27,6 +27,11 @@
       <name>Test Project Site</name>
       <url>file:///tmp/maven-project-site</url>
     </site>
+           <snapshotRepository>
+                    <id>deployment</id>
+                    <name>snapshot repository</name>
+                    <url>http://3.83.213.187:8081/repository/nexusdemo/</url>
+           </snapshotRepository>
   </distributionManagement>
 
   <build>
