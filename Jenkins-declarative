@@ -16,19 +16,19 @@ PATH="/opt/maven/maven3/bin:$PATH"
             sh "mv target/*.war  target/myweb.war"
          }
       }
-      stage{
+      stage('Tomcat Deploy'){
       sshagent(['Tomcat']) {
     steps{
     
-    sh """
-     scp -o StrictHostKeyChecking=no target/myweb.war ec2-user:172.31.42.120:/opt/tomcat9/webapps/
+          sh """
+              scp -o StrictHostKeyChecking=no target/myweb.war ec2-user:172.31.42.120:/opt/tomcat9/webapps/
      
-     ssh ec2-user:172.31.42.120 tomcatdown
+               ssh ec2-user:172.31.42.120 tomcatdown
      
-     ssh ec2-user:172.31.42.120 tomcatup
-         
-    """
-}
+               ssh ec2-user:172.31.42.120 tomcatup
+             """
+         }
+      }
       }
    }
 }
