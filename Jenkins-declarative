@@ -7,5 +7,10 @@ pipeline {
             git credentialsId: 'GitHub', url: 'https://github.com/gangaprasadp/hello-world'
          }
       }
+       stage('Maven build') {
+         steps {
+            sh "mvn clean package"
+         }
+      }
    }
 }
