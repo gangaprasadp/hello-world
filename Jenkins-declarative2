@@ -1,0 +1,33 @@
+currentBuild.displayName = "Docker-Ansible#"+currentBuild.number
+
+pipeline {
+   agent any
+
+environment{
+PATH="/opt/maven/maven3/bin:$PATH"
+}
+   stages {
+      stage('Git Checkout') {
+         steps {
+            git credentialsId: 'GitHub', url: 'https://github.com/gangaprasadp/hello-world'
+         }
+      }
+       stage('Maven build') {
+         steps {
+            sh "mvn clean package"
+            sh "mv webapp/target/*.war  webapp/target/myweb.war"
+         }
+      }
+      stage('Ansible Copy'){
+            steps{
+         sshagent(['Ansible']) {
+              sh """
+              scp -o StrictHostKeyChecking=no webapp/target/myweb.war ec2-user@172.31.95.208:/opt/docker/
+              ssh cd /opt/docker
+			        ssh docker build -t docker_demo .
+			        """
+         }
+      }
+      }
+   }
+}
