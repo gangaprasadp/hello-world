@@ -24,9 +24,8 @@ PATH="/opt/maven/maven3/bin:$PATH"
               sh """
               scp -o StrictHostKeyChecking=no webapp/target/myweb.war ec2-user@172.31.95.208:/opt/docker
               ssh ec2-user@172.31.95.208 sudo su;
-	      ec2-user@172.31.95.208 cd /opt/docker;
-	      ec2-user@172.31.95.208 docker build -t docker_demo . ;
-			        """
+	      ec2-user@172.31.95.208 docker build -t docker_demo /opt/docker ;
+	      """
          }
       }
       }
