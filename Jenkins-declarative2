@@ -23,8 +23,7 @@ PATH="/opt/maven/maven3/bin:$PATH"
          sshagent(['Ansible']) {
               sh """
               scp -o StrictHostKeyChecking=no webapp/target/myweb.war ec2-user@172.31.95.208:/opt/docker
-              ssh ec2-user@172.31.95.208 cd /opt/docker
-	      ssh ec2-user@172.31.95.208 docker build -t docker_demo .
+              ssh ec2-user@172.31.95.208 cd /opt/docker;ec2-user@172.31.95.208 docker build -t docker_demo .
 			        """
          }
       }
